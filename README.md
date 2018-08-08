@@ -5,7 +5,7 @@
 This repository contains program to train a neural network model on MNIST hand written dataset using Keras. The trained network is then freezed and served as a tensorflow model using flask-restplus framework. 
 
 
-##### Technology Used
+#### Technology Used
  - Python 2.7
  - Keras (With tensorflow as backend)
  - Tensorflow 
@@ -14,7 +14,7 @@ This repository contains program to train a neural network model on MNIST hand w
  - JQuery
  
 
-##### Deployment instruction
+#### Deployment instruction
 1. For training and saving a model MNIST_Network.py is used, example for running the code are illustrated below. Default value number of epoch is 10, default batch_size value is 200 and efault value for the model name is handwritten_digit_recog_model.h5 
     ```Bash
     python MNIST_Network.py
@@ -36,7 +36,7 @@ This repository contains program to train a neural network model on MNIST hand w
 
 **Note**: To view the model architecture of the trained model open model_plot.png
 
-##### Pretrained Model Download
+#### Pretrained Model Download
 To download a pretrained keras as well as frozen mode use the google drive link specified below. 
    
 [Pre Trained Models](https://drive.google.com/drive/folders/1wGDci2gTGqHuya4n3eLRphNrIC-Yv-CF?usp=sharing)
