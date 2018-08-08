@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<body>
+ <form method="post" enctype="multipart/form-data"  id="forminput" >
+    <div class="form-group">
+        <label>Upload Input Image </label>
+        <input name="image"  id="input_file"  class="upload-file btn btn-info" type="file">
+    </div>
+
+    <button  class="btn btnFile btn-success">Upload </button>
+    <br>
+    <span id="result_proba", style="width:80%;"></span>
+    <div id="final_res", style="width:80%;"></div>
+
+</form>   
+
+
+
+
+<script>
+
+
+    $('#input_file').on("change", function(){ 
+        var file = this.files[0];
+        var flag = false;
+        name = file.name;
+        size = file.size;
+        type = file.type;
+        var extension = name.replace(/^.*\./, '');
+        if (file.name.length < 1) {
+            alert("Please select a file");
+            flag = true;
+
+        }
+        else if(extension != 'jpeg' && extension != 'png' ) {
+            alert("We only support JPEG/PNG files for now");
+            flag = true;
+
+        }
+        else {
+            $('.btnFile').attr("disabled", false);
+
+        }
+
+        if(flag == true){
+            $(this).val('');
+        }
+    });
+
+    $('.btnFile').click(function (e) {
+        e.preventDefault();
+        $('#result_proba').text('')
+        $('final_res').text('')
+        
+        var formData = new FormData($('#forminput')[0]);
+        $.ajax({
+            url: 'http://localhost:5000/recognize/',
+            type: 'POST',
+
+            success: completeHandler = function (data) {
+                var result = JSON.parse(data);
+                var arr = result['probability'][0]
+                var digit = arr.indexOf(Math.max.apply(window,arr));
+                $('#result_proba').text(arr);
+                $('#final_res').text('The digit is likely '+digit);
+            },
+            error: errorHandler = function (error1) {
+                /* Show alert in case of error */
+                console.log(error1);
+                alert("We have received error, please check console log for details");
+
+            },
+                    // Form data
+                    data: formData,
+                    // Options to tell jQuery not to process data or worry about the content-type
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType:'json'
+                }, 'json')
+
+        return false;
+    });
+
+    
+
+
+
+</script>
+
+
+</body>
+
+</html>
