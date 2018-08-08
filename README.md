@@ -39,4 +39,4 @@ This repository contains program to train a neural network model on MNIST hand w
 ##### Pretrained Model Download
 To download a pretrained keras as well as frozen mode use the google drive link specified below. 
    
-    [Pre Trained Models](https://drive.google.com/drive/folders/1wGDci2gTGqHuya4n3eLRphNrIC-Yv-CF?usp=sharing)
+[Pre Trained Models](https://drive.google.com/drive/folders/1wGDci2gTGqHuya4n3eLRphNrIC-Yv-CF?usp=sharing)
