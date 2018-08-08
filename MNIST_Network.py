@@ -36,8 +36,8 @@ def neural_network():
 	conv2_2 = Conv2D(64, (3, 3), activation='relu', padding='same')(conv1_pooling)
 	conv2_2_pooling = MaxPooling2D(pool_size=(2, 2))(conv2_2)
 
-	conv3_1 = Conv2D(512, (7, 7), activation='relu')(conv2_1_pooling)
-	conv3_2 = Conv2D(512, (7, 7), activation='relu')(conv2_2_pooling)
+	conv3_1 = Conv2D(512, (3, 3), activation='relu', padding='same')(conv2_1_pooling)
+	conv3_2 = Conv2D(512, (3, 3), activation='relu', padding='same')(conv2_2_pooling)
 	# Combine layer conv3_1 and conv3_2 to form conv3.
 	conv3 = concatenate([conv3_1, conv3_2])
 
@@ -79,7 +79,7 @@ def main(epc, batch, model_name):
 
 	# Load model and save the visualization of the model.
 	model = neural_network()
-	#plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+	plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
 
 	# Train the model using training set.
 	model.fit(train_data, train_labels, validation_data=(test_data, test_labels), epochs=epc, batch_size=batch, verbose=1)
